@@ -9,24 +9,24 @@ contact:
 """
 
 import re
-import urllib.request  # 在python2中，用法为 import urllib
+import urllib.request                             # 在python2中，用法为 import urllib
 
 
 def getHtml(url):
-    page = urllib.request.urlopen(url)  # python2中， urllib.urlopen
-    html = page.read()  # 这里page，也可以直接使用上面定义的值
+    page = urllib.request.urlopen(url)            # python2中， urllib.urlopen
+    html = page.read()                            # 这里page，也可以直接使用上面定义的值
     # print("01",html)
-    # return html  # 这里 return 了 html，下面的打印 02 ，才有值；否则为 None
+    return html                                   # 这里 return 了 html，下面的打印 02 ，才有值；否则为 None
 
 
 def getImg(html):
-    reg = r'src="(.+?\.jpg)"pic_ext'
+    reg = r'src="(.*?\.jpg)"'
     print("01", reg)
-    imgre = re.compile(reg)      #  re.compile()把正则表达式编译成一个正则表达式对象.
+    imgre = re.compile(reg)                        #  re.compile()把正则表达式编译成一个正则表达式对象.
     print("02", imgre)
-    html = html.decode("utf-8").encode("GBK")    #  python3 中需要添加，否则会报错；
+    html = html.decode('utf-8')                      #  python3 中需要添加，否则会报错；
     print("02+", html)
-    imglist = re.findall(imgre, html) # 读取html中包含imgre的数据
+    imglist = re.findall(imgre, html)              # 读取html中包含imgre的数据
     print("03", imglist)
     x = 0
     for imgurl in imglist:
